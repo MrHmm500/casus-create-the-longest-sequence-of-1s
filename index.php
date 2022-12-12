@@ -15,7 +15,7 @@ foreach ($testCases as $caseName => $caseData) {
     extractOutputFromInput($input);
 }
 
-function extractOutputFromInput($input)
+function extractOutputFromInput(array $input): void
 {
     for ($i = 1; $i < count($input); $i++) {
         $input[$i - 1] = strlen($input[$i -1]) + strlen($input[$i]);
