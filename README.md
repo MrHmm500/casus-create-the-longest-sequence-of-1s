@@ -4,3 +4,6 @@ Given some bitstring b, you may change one bit from a 0 to a 1 in order to creat
   
 Example: 11011101111  
 Flipping the second 0 results in 11011111111, where the longest sequence of 1s is 8 long.
+
+To host this run:
+php -S localhost:8080 -t [your-folder-name]

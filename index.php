@@ -1,13 +1,13 @@
 <?php
 $jsonTestCases = file_get_contents('testcases.json');
 $testCases = json_decode($jsonTestCases);
-foreach($testCases as $caseName => $caseData) {
+foreach ($testCases as $caseName => $caseData) {
     echo "-----------------------------------<br />";
     echo $caseName . ' wordt getest<br />';
     echo 'expected output: <br />';
     echo str_replace("\n", '<br />', str_replace(' ', '&nbsp;', $caseData->expectedOutput)) . '<br /><br />';
 
-    $input = $caseData->input;
+    $input = explode('0', $caseData->input);
 
     echo "-----------------------------------<br />";
     echo "actual output:<br />";
@@ -17,21 +17,10 @@ foreach($testCases as $caseName => $caseData) {
 
 function extractOutputFromInput($input)
 {
-    $array = explode('0', $input);
-    $arraycount = count($array);
-    $highestAmount = 0;
-    foreach($array as $i => $group) {
-        if(($i+1) != $arraycount) {
-            $length = strlen($array[$i]);
-            $length += strlen($array[$i+1]);
-        }
-
-        if($length > $highestAmount) {
-            $highestAmount = $length;
-        }
+    for ($i = 1; $i < count($input); $i++) {
+        $input[$i - 1] = strlen($input[$i -1]) + strlen($input[$i]);
     }
-
-    $highestAmount++;
-
-    echo("$highestAmount<br />");
+    array_pop($input);
+    $answer = max($input);
+    echo ++$answer . "<br /><br />";
 }
